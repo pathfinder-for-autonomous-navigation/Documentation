@@ -1,5 +1,5 @@
 # PAN Software Documentation
-[![Documentation Status](https://readthedocs.com/projects/pathfinder-for-autonomous-navigation-pan-software-manual/badge/?version=latest&token=996baa95133a37741a847ffa6ec32f55ac1d898192e988063413d56687fbc20e)](https://pathfinder-for-autonomous-navigation-pan-software-manual.readthedocs-hosted.com/en/latest/?badge=latest)
+[![Documentation Status](https://readthedocs.org/projects/pan-software/badge/?version=latest)](https://pan-software.readthedocs.io/en/latest/?badge=latest)
 
 First create a virtual environment and install Sphinx dependencies:
 ````
