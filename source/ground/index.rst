@@ -1,10 +1,7 @@
-Welcome to the PAN Software Systems Manual
+Ground Software Documentation
 =======================================================
 
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
-   flight_software/index
-   psim/index
-   ground/index

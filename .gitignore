@@ -16,6 +16,7 @@
 .rope_project/
 .ropeproject/
 build/
+_build/
 bower_components/
 contrib/supervisord.log
 contrib/supervisord.pid

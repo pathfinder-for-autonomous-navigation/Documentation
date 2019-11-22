@@ -1,10 +1,16 @@
-Welcome to the PAN Software Systems Manual
+Flight Software Subsystems
 =======================================================
 
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
-   flight_software/index
-   psim/index
-   ground/index
+   clock
+   eeprom
+   eps
+   adcs
+   prop
+   gnc
+   telemetry
+   docking
+   gps

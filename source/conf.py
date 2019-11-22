@@ -17,9 +17,9 @@
 
 # -- Project information -----------------------------------------------------
 
-project = 'PAN Software'
-copyright = '2019, Tanishq Aggarwal, Kyle Krol, Nathan Zimmerberg, Athena Cheung, Shihao Cao, Fatima Yousuf, Stewart Aslan'
-author = 'Tanishq Aggarwal, Kyle Krol, Nathan Zimmerberg, Athena Cheung, Shihao Cao, Fatima Yousuf, Stewart Aslan'
+project = 'PAN Software Systems Manual'
+copyright = '2019'
+author = 'Tanishq Aggarwal, Stewart Aslan, Shihao Cao, Athena Cheung, Kyle Krol, Fatima Yousuf, Nathan Zimmerberg'
 
 
 # -- General configuration ---------------------------------------------------
