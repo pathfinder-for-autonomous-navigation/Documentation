@@ -54,7 +54,7 @@ to manage the value of a readable/writable state field. Check out more info abou
 
 The State Field Registry
 ------------------------
-
+The state field registry is nothing more than 
 
 Control Task Timing
 ------------------------
