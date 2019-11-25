@@ -1,6 +1,8 @@
 Flight Software Documentation
 =======================================================
 
+The code for flight software is available `here<https://github.com/pathfinder-for-autonomous-navigation/FlightSoftware>`_.
+
 I recommend reading :doc:`components` as an absolute first, then there are two paths you
 can take through this documentation:
 
