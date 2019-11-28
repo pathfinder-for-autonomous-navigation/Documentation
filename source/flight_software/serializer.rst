@@ -1,3 +1,4 @@
+===========
 Serializers
 ===========
 
@@ -27,8 +28,7 @@ are exposed by Serializer:
 
 - ``serialize``: Converts a given value into a bitstream, which is stored internally within the Serializer object.
 - ``deserialize``: Converts the internally stored bitstream into a value and writes it to an input pointer.
-- ``deserialize``: An overload of deserialize takes the ASCII-encoded value provided in an input character buffer
-                   and converts the given value into a bitstream, which is then internally stored.
+- ``deserialize``: An overload of deserialize takes the ASCII-encoded value provided in an input character buffer and converts the given value into a bitstream, which is then internally stored.
 - ``get_bit_array``: Gets a reference to the internal bitstream (this is useful for downlinking).
 - ``set_bit_array``: Sets the internal bitstream (useful for uplinks.)
 - ``print``: Converts the internally stored bitstream into an ASCII value that can be printed to a screen.
@@ -39,47 +39,55 @@ will be explained in the upcoming sections), there are available default paramet
 specifying some of these three values.
 
 Serializer is defined for the following basic types, which are explained in more detail in the hyperlinked sections:
-- boolean-serializer_
-- int-serializer_
-- gps-time-serializer_
-- quaternion-serializer_
-- vector-serializer_
+
+- `boolean-serializer`_
+- `int-serializer`_
+- `gps-time-serializer`_
+- `quaternion-serializer`_
+- `vector-serializer`_
 
 .. _boolean-serializer:
-Boolean Serializer (``Serializer<bool>``)
-================================================
+
+Boolean Serializer
+==================
+Type name: ``Serializer<bool>``
+
 Booleans are the simplest serializer to implement: a boolean's value is either a 1 or a 0, so it can be
 represented by a bitstream of size 1. The constructor for a boolean serializer accepts no arguments since none
 are required.
 
 .. _int-serializer:
-Integer Serializer (``Serializer<unsigned int>``, ``Serializer<signed int>``, ``Serializer<unsigned char>``, ``Serializer<signed char>``)
-================================================
+
+Integer Serializer
+==================
+Type names: ``Serializer<unsigned int>``, ``Serializer<signed int>``, ``Serializer<unsigned char>``, ``Serializer<signed char>``
+
 I described integer serializers in some detail in the introductory section, but here I'll go into greater
 detail.
 
 There are a few kinds of constructors for integer serializers:
+
 - There's the "standard" constructor that requires three arguments, ``min``, ``max``, and ``bitsize``.
-- There's a constructor accepting only ``min`` and ``max``, which automatically computes the required bitsize
-  needed to represent the full range of the possible integer values (i.e. ``bitsize`` = ceil(log2(max - min))).
-- For `unsigned int` and `unsigned char` serializers, there's a constructor accepting only ``max``. Internally
-  this just calls the constructor we just mentioned, but sets ``min`` to 0.
-- Also for `unsigned int` and `unsigned char` serializers, there's a no-argument constructor that sets ``max`` to
-  2^32 - 1 for ``unsigned int`` serializers and to 2^8 - 1 for ``unsigned char`` serializers.
+- There's a constructor accepting only ``min`` and ``max``, which automatically computes the required bitsize needed to represent the full range of the possible integer values (i.e. ``bitsize`` = :math:`\lceil \log_2(\texttt{max} - \texttt{min}) \rceil`).
+- For `unsigned int` and `unsigned char` serializers, there's a constructor accepting only ``max``. Internally this just calls the constructor we just mentioned, but sets ``min`` to 0.
+- Also for `unsigned int` and `unsigned char` serializers, there's a no-argument constructor that sets ``max`` to 2^32 - 1 for ``unsigned int`` serializers and to 2^8 - 1 for ``unsigned char`` serializers.
 
 These serializers, in general, work as follows: the specified ``bitsize`` provides 
 
 .. _gps-time-serializer:
-GPS Time Serializer (``Serializer<gps_time_t>``)
-================================================
-x
+
+GPS Time Serializer
+===================
+Type name: ``Serializer<gps_time_t>``
 
 .. _quaternion-serializer:
-Quaternion Serializer (``Serializer<f_vector_t>``, ``Serializer<d_vector_t>``)
-================================================
-x
+
+Quaternion Serializer
+=====================
+Type name: ``Serializer<f_quat_t>``, ``Serializer<d_quat_t>``
 
 .. _vector-serializer:
-Vector Serializer (``Serializer<f_quat_t>``, ``Serializer<d_quat_t>``)
-================================================
-x
+
+Vector Serializer
+=================
+Type name: ``Serializer<f_vec_t>``, ``Serializer<d_vec_t>``
