@@ -73,6 +73,8 @@ of the Flight Software, which we call the `flight software cycle`, is single-thr
 Control Tasks, one after the other. The general structure of this loop is read-compute-actuate, as in most robot
 control loops, and consists of the following items:
 
+TODO fill out entire table
+
 +--------------------------+-----------+-------------------------------------------------------------+
 | Item Name in Software    | Offset    | Description                                                 |
 |                          | Time (ms) |                                                             |

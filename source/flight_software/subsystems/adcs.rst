@@ -1,3 +1,78 @@
 ==================================
 Attitude Determination and Control
 ==================================
+
+The attitude determination and control subsystem (ADCS) box of the satellite is a
+0.5U unit attached at the end of our spacecraft opposite its docking face. It has
+its own microcontroller, a Teensy 3.6, that runs a specialized software and is connected
+to the Flight Controller Teensy over I2C. The ADCS box provides fairly robust but slow pointing
+control--the slowness is sufficient for PAN's purposes.
+
+Attitude Determination System
+=============================
+The attitude on the spacecraft is determined using a combination of three sensors:
+the sun sensors, the gyroscope, and the two magnetometers.
+
+Sun Sensors
+-----------
+The sun sensors are 5 arrays of 4 sensors, with each array attached to one of the
+faces of the ADCS box, and each sensor in the array angled off the surface of the box
+in a different way. The sun sensors are nothing more than phototransistors attached
+to an analog-to-digital converter. The five analog-to-digital converters (one for each
+array) are connected via I2C to the Teensy.
+
+The current through each phototransistor can be read as a voltage on the Teensy.
+The currents on all twenty sensors are fed through a precomputed linear regression
+to determine the vector to the sun relative to the spacecraft in its body frame. If
+such a regression returns inconclusive results then the ADCS Teensy lets the Flight Controller
+know (see `Interface with Flight Software`_ below).
+
+Gyroscope and Heater
+--------------------
+The gyroscope is connected over I2C to the ADCS Teensy. To ensure the gyroscope measurement
+does not drift due to thermal fluctuations, the gyroscope is embedded underneath a resistive
+heating device that operates via a bang-bang controller. The setpoint of the controller is
+managed by the Flight Controller.
+
+Magnetometers
+-------------
+There are two magnetometers on the spacecraft.
+
+TODO
+
+Attitude Control System
+=======================
+TODO
+
+The ADCS Software
+=================
+TODO explain ADCS Software functionality.
+
+Interface with Flight Software
+------------------------------
+The interface of the ADCS box Teensy with the flight Teensy is over register-based I2C,
+effectively SMBUS. In this relationship the ADCS Teensy is a slave and the flight Teensy
+is a master.
+
+**Reading from ADCS Controller**
+
+The flight controller can read values off of the ADCS Teensy via a "point-and-read" interface.
+The flight controller first sets the value of a read pointer, which specifies the register
+address at which it wants to receive values. The ADCS Teensy then responds with a set of
+values that begin at the register specified by the flight controller and run contiguously up
+to some other register address. This allows the flight controller to read values off of the ADCS
+controller in bulk, which reduces protocol overhead when accessing related values.
+
+Below we list the "read registers" on the ADCS and where a read operation ends when the read
+pointer is set to that register address. As an example for explaining the previous paragraph, note
+that setting the read pointer to the X-value of the magnetometer causes the ADCS Teensy to report
+back the X, Y, `and` Z values of the magnetometer. This is sensible since any control scheme would
+want all three values off of the ADCS device.
+
+TODO insert table from Kyle's document
+
+**Writing to ADCS Controller**
+In order to actuate attitude commands, the ADCS box provides registers that can be written to.
+This list of registers is specified below.
+
+TODO insert table from Kyle's document

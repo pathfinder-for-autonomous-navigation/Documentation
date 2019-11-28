@@ -40,13 +40,11 @@ specifying some of these three values.
 
 Serializer is defined for the following basic types, which are explained in more detail in the hyperlinked sections:
 
-- `boolean-serializer`_
-- `int-serializer`_
-- `gps-time-serializer`_
-- `quaternion-serializer`_
-- `vector-serializer`_
-
-.. _boolean-serializer:
+- `Boolean Serializer`_
+- `Integer Serializer`_
+- `GPS Time Serializer`_
+- `Quaternion Serializer`_
+- `Vector Serializer`_
 
 Boolean Serializer
 ==================
@@ -55,8 +53,6 @@ Type name: ``Serializer<bool>``
 Booleans are the simplest serializer to implement: a boolean's value is either a 1 or a 0, so it can be
 represented by a bitstream of size 1. The constructor for a boolean serializer accepts no arguments since none
 are required.
-
-.. _int-serializer:
 
 Integer Serializer
 ==================
@@ -73,21 +69,19 @@ There are a few kinds of constructors for integer serializers:
 - Also for `unsigned int` and `unsigned char` serializers, there's a no-argument constructor that sets ``max`` to 2^32 - 1 for ``unsigned int`` serializers and to 2^8 - 1 for ``unsigned char`` serializers.
 
 These serializers, in general, work as follows: the specified ``bitsize`` provides 
-
-.. _gps-time-serializer:
+TODO
 
 GPS Time Serializer
 ===================
 Type name: ``Serializer<gps_time_t>``
-
-.. _quaternion-serializer:
+TODO
 
 Quaternion Serializer
 =====================
 Type name: ``Serializer<f_quat_t>``, ``Serializer<d_quat_t>``
-
-.. _vector-serializer:
+TODO
 
 Vector Serializer
 =================
 Type name: ``Serializer<f_vec_t>``, ``Serializer<d_vec_t>``
+TODO
