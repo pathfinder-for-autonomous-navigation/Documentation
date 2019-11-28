@@ -6,3 +6,5 @@ Simulation Software Documentation
    :maxdepth: 2
    :caption: Contents:
 
+   testing_architecture
+   
