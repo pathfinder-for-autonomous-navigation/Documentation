@@ -19,7 +19,7 @@
 
 project = 'PAN Software Systems Manual'
 copyright = '2019'
-author = 'Tanishq Aggarwal, Stewart Aslan, Shihao Cao, Athena Cheung, Kyle Krol, Fatima Yousuf, Nathan Zimmerberg'
+author = "PAN Software Team"
 
 
 # -- General configuration ---------------------------------------------------

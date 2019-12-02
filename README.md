@@ -31,5 +31,6 @@ In either case, visit `http://localhost:8080` in your browser to read your local
 Sphinx documentation is written in a markup style called reStructuredText (RST). Here's a good [guide to RST](http://docutils.sourceforge.net/docs/user/rst/quickref.html) that you might want to look at if you want to contribute to this repository.
 
 ## Pushing your changes
-There are no required PR reviews on this repository, so once you've written documentation and if it passes
-the Travis CI build, then you can merge in your PR!
+Once you've written documentation, open a PR. If it passes the Travis CI build, then your PR
+will be merged in automatically! There are no reviews required for PRs on this repository, in order
+to encourage maximum development of documentation.
