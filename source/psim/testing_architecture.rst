@@ -18,4 +18,23 @@ Flight software must be proven on HOOTL and TITL levels before running at a VITL
 This testing architecture allows us to have iterated stages of proving the flight
 readiness of software whilst minimizing risk to expensive hardware during testing.
 
-TODO
+Software Stack
+==============
+
+.. figure:: testing_architecture.png
+   :scale: 30 %
+   :align: center
+   :alt: Testing architecture
+
+At the core of the simulation architecture is the **StateSession**. This is an integration
+class that either connects to a Teensy running flight software or to a desktop binary executable,
+and allows exchanging state fields with the flight software.
+
+Related to the **StateSession** is the **RadioSession**, which creates a connection to the
+email account that PAN uses to talk to the Iridium satellite network. Using this email account,
+the **RadioSession** is able to interpret downlinks and send uplinks when requested by the
+simulation.
+
+At the top level, the **SimulationRun** architects the **Simulation**, any **StateSession**
+objects, any **RadioSession** objects, the **StateCmdPrompt**, and **Datastore** and **Logger**
+objects required by the state sessions, simulation, and radio session.

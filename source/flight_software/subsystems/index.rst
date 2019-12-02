@@ -6,12 +6,12 @@ Flight Software Subsystems
    :maxdepth: 2
    :caption: Contents:
 
-   clock
    eeprom
    eps
    adcs
    prop
    gnc
    telemetry
+   quake
    docking
    gps

@@ -14,7 +14,7 @@ Nominal Mission Management
 .. figure:: mission_manager.png
    :scale: 30 %
    :align: center
-   :alt: map to buried treasure
+   :alt: Mission manager state machine diagram
 
    Diagram depicting the mission manager state transitions. This document is a little outdated, and
    the text below should be considered the source of truth, but it still is a generally accurate

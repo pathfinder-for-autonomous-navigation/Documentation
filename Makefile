@@ -13,5 +13,5 @@ PORT = 8080 				   #  Port at which live HTML starts its server
 livehtml: Makefile
 	@sphinx-autobuild $(SOURCEDIR) $(BUILDDIR)/html -p $(PORT) $(SPHINXOPTS) $(O)
 
-html: Makefile
+%: Makefile
 	@$(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)

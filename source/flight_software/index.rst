@@ -3,10 +3,14 @@ Flight Software and Systems Documentation
 =========================================
 
 This section of the documentation contains documentation on both the flight software and the
-PAN satellite's subsystems. The two ideas go hand-in-hand, which is why their documentation is
-woven together.
+PAN satellite's subsystem architectures. The two ideas go hand-in-hand, which is why their
+documentation is woven together.
 
 The code for flight software is available `here <https://github.com/pathfinder-for-autonomous-navigation/FlightSoftware/>`_.
+You should also check out `CommonSoftware <https://github.com/pathfinder-for-autonomous-navigation/CommonSoftware/>`_, which is
+where base-level utilities like serializers, state fields, and the debug console live, and 
+`ADCSSoftware <https://github.com/pathfinder-for-autonomous-navigation/FlightSoftware/>`_, which is where the software for the
+ADCS Teensy lives (see :doc:`subsystems/adcs` for more details).
 
 I recommend reading :doc:`components` as an absolute first, then there are two paths you
 can take through this documentation:

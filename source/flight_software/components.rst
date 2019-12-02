@@ -1,6 +1,6 @@
-=======================================================
+==========================
 Flight Software Components
-=======================================================
+==========================
 
 Control Tasks
 =============
@@ -135,3 +135,20 @@ Software Cycle in Flight Code vs HOOTL/HITL Code
 This is the flight version of the software cycle. In the HOOTL/HITL (hardware-out-of-the-loop/hardware-in-the-loop)
 versions of the cycle, there is an additional ``DebugTask`` that runs after the ClockManager. Its purpose is to
 exchange state field data with the simulation. The ``DebugTask`` is required to last at most 50 milliseconds.
+
+Debug Console
+=============
+The ``DebugTask`` makes use of a utility that we call the `debug console`. The debug console manages input/output
+via the USB serial port located on the Teensy. It has two functions: transacting state field values with a simulation
+computer, and to serve as a general-purpose logging utility for software. Log messages can be written using an exposed
+function called ``printf``, which behaves in the same way as standard ``printf`` except for one parameter called the
+`severity` of the message. The following are the available severity levels (adapted from `here <https://support.solarwinds.com/SuccessCenter/s/article/Syslog-Severity-levels>`_):
+
+- ``debug``: Information useful to developers for debugging the application.
+- ``info``: Normal operational messages that require no action.
+- ``notice``: Events that are unusual, but not error conditions.
+- ``warning``: May indicate that an error will occur if action is not taken.
+- ``error``: Error conditions
+- ``critical``: Critical error conditions
+- ``alert``: Should be corrected immediately
+- ``emergency``: System is unusable.
