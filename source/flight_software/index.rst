@@ -31,4 +31,5 @@ is important for flight software developers.
    desktop_operation
    serializer
    mission_manager
+   states_and_modes
    subsystems/index
