@@ -1,9 +1,16 @@
-This file describes the Propulsion System driver. 
 
-PropulsionSystem class defines the interface for the propulsion system, which 
- consists of an inner tank, Tank1, and the (outer) thrust tank, Tank2. 
- This driver provides functionality for opening and closing valves on both tanks,
- setting and enforcing the thrust schedule 
+The propulsion system consists of an inner tank (Tank1) and the (outer) thrust tank (Tank2). 
+There are two valves from Tank1 to Tank2 - the primary valve and the backup valve. We 
+refer to these valves as the Tank1 valves. 
+Tank2 has four valves that are arranged tetrahedrally. 
+The purpose of the propulsion system is to pressurize Tank1 and then open the valves in Tank2
+at a predetermined schedule. This will create a force in the opposite of direction. 
+The remainder of this document describes the Propulsion System driver. 
+
+The propulsion system (PropulsionSystem.hpp) driver provides functionality for:
+
+1. opening and closing valves on both tanks
+2. setting and enforcing the thrust schedule 
  
  It consists of a static Tank1 (inner tank) and Tank2 (thrust tank) data objects. 
  
