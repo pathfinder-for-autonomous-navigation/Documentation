@@ -44,15 +44,21 @@ The PAN Mission Manager contains the following states:
 
 - The "PAN-specific" states, which are very specific to the PAN mission.
 
-  - **Follower**: During this state the satellite points itself in the direction of the other satellite,
+  - **Follower**: During this state the satellite points itself to maximize comms + power,
     and executes propulsion manuevers that match its orbit and phase with the leader and satellite. The
     leader's position is continuously provided via ground uplink to the follower.
 
-    Once the ground software determines that the two satellites are fairly close together, it can send
-    an uplink command to move the satellite into "Docking" state. This determination is
-    dependent on the follower and leader satellites achieving CDGPS lock (see :doc:`subsystems/gps`).
-
   - **Leader**: This state is the same as the follower state except that propulsion commands are disabled.
+
+  - **Follower Close Approach**: During this state the satellite does the same things as in the "follower"
+    state except it points towards the other satellite.
+
+    Once the two satellites are fairly close together, they both move into the "Docking" state. This
+    determination is dependent on the follower and leader satellites achieving CDGPS lock
+    (see :doc:`subsystems/gps`).
+
+  - **Leader Close Approach**: This state is the same as the leader close approach state except that
+    propulsion commands are disabled.
 
   - **Docking**: The satellites drift towards each other passively (no propulsive or attitude guidance
     is applied), with the magnetic docking ports on the ends of the satellites causing the satellites
