@@ -55,6 +55,32 @@ be transmitted over the radio, readable and writable state fields contain a ``Se
 The control tasks that manage telemetry use the functions contained within the serializer
 to manage the value of a readable/writable state field. Check out more info about :doc:`serializer`.
 
+Faults
+======
+
+TODO: COMPLETE DOCUMENTATION
+
+Faults serve are a way to modifiy the behavior of the satellite in a fundamental, off-nomial way.
+Faults are declared and signaled / unsignaled in the ControlTask that is most closely tied to the
+data that can determine a fault condition. For **PAN**, since we are choosing to only use Faults
+on hardware failure, this means Faults are declared in the device monitor Control Tasks.
+
+Upon construction, Faults must be tied to a name (so that it can be located in the SFR),
+a *persistence*, a number of consecutive signals that are required after which the next signal
+will trip the fault. Faults must also be provided a control_cycle_count, which to prevent multiple
+signals on the same cycle.
+
+Faults can be signaled through the member function ``signal()``, which increments a private
+internal counter *num_consecutive_signals*. ``signal()`` should be called whenever the Fault
+condition is true. If the fault condition is not met during a control cycle, the ``unsignal()``
+function should be called to reset ``num_consecutive_signals`` to 0.
+
+Faults themselves encapsulate N different fields that are implemented as statefield
+
+- A boolean statefield that represents whether or not it is *faulted*
+- Persistence
+
+
 The State Field Registry
 ========================
 The state field registry contains lists of pointers to readable, writable, and internal state fields,
