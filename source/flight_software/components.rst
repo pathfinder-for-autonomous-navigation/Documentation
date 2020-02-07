@@ -80,6 +80,24 @@ Faults themselves encapsulate N different fields that are implemented as statefi
 - A boolean statefield that represents whether or not it is *faulted*
 - Persistence
 
+The Fault class also includes these helpful methods for Unit Testing only
+
+.. code-block:: cpp
+
+    #ifdef UNIT_TEST
+    void Fault::override() {
+        override_f.set(true);
+    }
+    void Fault::un_override() {
+        override_f.set(false);
+    }
+    void Fault::suppress() {
+        suppress_f.set(true);
+    }
+    void Fault::unsuppress() {
+        suppress_f.set(false);
+    }
+    #endif
 
 The State Field Registry
 ========================
