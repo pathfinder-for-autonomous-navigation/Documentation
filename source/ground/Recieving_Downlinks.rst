@@ -8,13 +8,13 @@ ElasticSearch is a database that allows us to organize information into various 
 
 #. Iridium Reports 
 
-    * Name: Iridium_Report_[imei of the radio]
+    * Name: Iridium_Report_[IMEI of the radio]
 
-    * Iridium reports house the most recent information about telemetry, such as Mobile Originated Message Numbers (MOMSN), Mobile Terminated Message Numbers (MTMSN), and confirmation MTMSNs. An MOMSN number os the ID of the most recent downlink recieved. An MTMSN number is the ID of the most recent uplink sent from the ground. A confirmation MTMSN is what we call the MTMSN of the last uplink message recieved and processed by the radio. If the most recent confirmation MTMSN and the most recent MTMSN do not match up, that means that there is a message queued in Iridium that has not been recieved yet, and we prohibit the ground from sending any more uplinks by setting the send-uplinks flag in the Iridium report to False. 
+    * Iridium reports house the most recent information about telemetry, such as Mobile Originated Message Numbers (MOMSN), Mobile Terminated Message Numbers (MTMSN), and confirmation MTMSNs. An MOMSN number is the ID of the most recent downlink recieved. An MTMSN number is the ID of the most recent uplink sent from the ground. A confirmation MTMSN is what we call the MTMSN of the last uplink message recieved and processed by the radio. If the most recent confirmation MTMSN and the most recent MTMSN are not equal, then that means that there is a message queued in Iridium that has not yet been recieved by the satellite radio, and we prohibit the ground from sending any more uplinks by setting the `send-uplinks` flag in the Iridium report to False. 
 
-#. Statefield Reports (Statefield_Reports_[imei of the radio]). 
+#. Statefield Reports (Statefield_Reports_[IMEI of the radio]). 
 
-    * Name: Iridium_Report_[imei of the radio]
+    * Name: Iridium_Report_[IMEI of the radio]
 
     * Statefield Reports house the most recent information pertaining to the actual satellite(s). This information is found in the Short Burst Data (SBD) attachment in downlink emails. 
 
@@ -50,9 +50,9 @@ When the Flask server is started, it opens a thread `check_email_thread`, which 
 
 
 
-The Flask server also has an endpoint from which we can access data from the ElasticSearch database. This endpoint requires two queries: the imei number of 
+The Flask server also has an endpoint from which we can access data from the ElasticSearch database. This endpoint requires two queries: the IMEI number of 
 the radio you want telemetry information from, and the specific statefield that you want to know the most recent value of. The Flask server will then search 
-for the statefield report index based on the given imei number, and the search within that index for the value of the most recent statefield that was requested.
+for the statefield report index based on the given IMEI number, and the search within that index for the value of the most recent statefield that was requested.
 
 This endpoint is used for reading statefield information from a satellite when opening a RadioSession to a certain radio. It is also used by RadioSession to confirm whether 
 or not the ground is cleared to send more uplinks (i.e if there aren't any messages already queued to be sent to the satellite).
