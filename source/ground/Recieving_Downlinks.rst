@@ -4,13 +4,13 @@ Recieving Downlinks
 
 ElasticSearch
 ==============
-ElasticSearch is a database that allows us to organize information into various indexes or subcategories. In Ground software, every radio has two indexes in which we store telemetry data: 
+ElasticSearch is a database that allows us to organize information into various indexes or subcategories. In Ground software, every radio has two indexes in which we store telemetry data as JSON objects: 
 
 #. Iridium Reports 
 
     * Name: Iridium_Report_[imei of the radio]
 
-    * Iridium reports house the most recent information about telemetry, such as Mobile Originated Message Numbers (MOMSN), Mobile Terminated Message Numbers (MTMSN), and confirmation MTMSNs. A confirmation MTMSN is what we call the MTMSN of the last uplink message recieved and processed by the radio. If the most recent confirmation MTMSN and the most recent MTMSN do not match up, that means that there is a message queued in Iridium that has not been recieved yet, and we prohibit the ground from sending any more uplinks by setting the send-uplinks flag in the Iridium report to False. 
+    * Iridium reports house the most recent information about telemetry, such as Mobile Originated Message Numbers (MOMSN), Mobile Terminated Message Numbers (MTMSN), and confirmation MTMSNs. An MOMSN number os the ID of the most recent downlink recieved. An MTMSN number is the ID of the most recent uplink sent from the ground. A confirmation MTMSN is what we call the MTMSN of the last uplink message recieved and processed by the radio. If the most recent confirmation MTMSN and the most recent MTMSN do not match up, that means that there is a message queued in Iridium that has not been recieved yet, and we prohibit the ground from sending any more uplinks by setting the send-uplinks flag in the Iridium report to False. 
 
 #. Statefield Reports (Statefield_Reports_[imei of the radio]). 
 
@@ -32,7 +32,7 @@ When the Flask server is started, it opens a thread `check_email_thread`, which 
 
 #. Read the most recent unread email received from the Iridium email account.
 
-    * If the most recent unread email is identified as a downlink from a satellite radio, the server uses `parses <https://pan-software.readthedocs.io/en/latest/ground/Recieving_Downlinks.html#downlink-parser>`_ the information stored in the email attachment containing statefield data and returns a statefield report. A statefield report is a JSON object that holds statefield names, the updated values of each statefield, and the time at which the report was recieved.
+    * If the most recent unread email is identified as a downlink from a satellite radio, the server `parses <https://pan-software.readthedocs.io/en/latest/ground/Recieving_Downlinks.html#downlink-parser>`_ the information stored in the email attachment containing statefield data and returns a statefield report. A statefield report is a JSON object that holds statefield names, the updated values of each statefield, and the time at which the report was recieved.
 
     * If the most recent unread email is identified as a confirmation that a radio has received an uplink, the server will record that an uplink confirmation was just received and return None.
 
@@ -73,6 +73,6 @@ how downlink data is parsed:
 
 * `How serialized satellite information is organized and sent over radio <https://pan-software.readthedocs.io/en/latest/flight_software/subsystems/telemetry.html#downlink-producer>`_.
 
-The downlink parser reads files each containing a statefield information of a groups of flows with varying priorities and processes them at a bit level. If the first bit of a packet is 1, then that signifies the start of a new downlink frame. 
-The downlink producer will continue to read serialized data until it recieved another frame that starts with 1. Once that next frame that starts with 1 is recieved, the downlink parser finishes processing the most recently 
-collected frame and returns the statefield information as a JSON object.
+The downlink parser reads files/packets containing the statefield information of a groups of flows with varying priorities and processes them at a bit level. If the first bit of a packet is 1, then that signifies the start of a new downlink frame. 
+The downlink producer will continue to read serialized data until it recieves another frame that starts with 1. Once the downlink parser reads the next packet that starts with 1, that means the previous frame is finished and the downlink parser 
+returns the most recently collected frame as a JSON object.
