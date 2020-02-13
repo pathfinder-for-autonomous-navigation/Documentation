@@ -62,3 +62,17 @@ Downlink Parser
 The data coming from the satellite must be serialized and compressed because we are only able to send 70 bytes of information at a time over radio. 
 Thus, it is necessary to compress and then parse data from the satellite to ensure we can recieve as much information as possible whenever we are able
 to establish communication.
+
+As the thread in the Flask server reads unread emails from the Iridium network, it needs to be able to parse the serialized information and data into a readable
+JSON object (ElasticSearch only accepts JSON objects). This is the job of the Downlink Parser. 
+
+I recommend reading these two sections to better understand how downlink information is compressed and sent over radio to get a better sense of
+how downlink data is parsed:
+
+* `How satellite information is serialized  <http://127.0.0.1:8080/flight_software/serializer.html>`_.
+
+* `How serialized satellite information is organized and sent over radio <http://127.0.0.1:8080/flight_software/subsystems/telemetry.html#downlink-producer>`_.
+
+The downlink parser reads files each containing a statefield information of a groups of flows with varying priorities and processes them at a bit level. If the first bit of a packet is 1, then that signifies the start of a new downlink frame. 
+The downlink producer will continue to read serialized data until it recieved another frame that starts with 1. Once that next frame that starts with 1 is recieved, the downlink parser finishes processing the most recently 
+collected frame and returns the statefield information as a JSON object.
