@@ -32,7 +32,7 @@ When the Flask server is started, it opens a thread `check_email_thread`, which 
 
 #. Read the most recent unread email received from the Iridium email account.
 
-    * If the most recent unread email is identified as a downlink from a satellite radio, the server parses the information stored in the email attachment containing statefield data and returns a statefield report. A statefield report is a JSON object that holds statefield names, the updated values of each statefield, and the time at which the report was recieved.
+    * If the most recent unread email is identified as a downlink from a satellite radio, the server uses `parses <https://pan-software.readthedocs.io/en/latest/ground/Recieving_Downlinks.html#downlink-parser>`_ the information stored in the email attachment containing statefield data and returns a statefield report. A statefield report is a JSON object that holds statefield names, the updated values of each statefield, and the time at which the report was recieved.
 
     * If the most recent unread email is identified as a confirmation that a radio has received an uplink, the server will record that an uplink confirmation was just received and return None.
 
@@ -69,9 +69,9 @@ JSON object (ElasticSearch only accepts JSON objects). This is the job of the Do
 I recommend reading these two sections to better understand how downlink information is compressed and sent over radio to get a better sense of
 how downlink data is parsed:
 
-* `How satellite information is serialized  <http://127.0.0.1:8080/flight_software/serializer.html>`_.
+* `How satellite information is serialized  <https://pan-software.readthedocs.io/en/latest/flight_software/serializer.html>`_.
 
-* `How serialized satellite information is organized and sent over radio <http://127.0.0.1:8080/flight_software/subsystems/telemetry.html#downlink-producer>`_.
+* `How serialized satellite information is organized and sent over radio <https://pan-software.readthedocs.io/en/latest/flight_software/subsystems/telemetry.html#downlink-producer>`_.
 
 The downlink parser reads files each containing a statefield information of a groups of flows with varying priorities and processes them at a bit level. If the first bit of a packet is 1, then that signifies the start of a new downlink frame. 
 The downlink producer will continue to read serialized data until it recieved another frame that starts with 1. Once that next frame that starts with 1 is recieved, the downlink parser finishes processing the most recently 
