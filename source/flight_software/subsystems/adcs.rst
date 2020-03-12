@@ -8,6 +8,76 @@ its own microcontroller, a Teensy 3.6, that runs a specialized software and is c
 to the Flight Controller Teensy over I2C. The ADCS box provides fairly robust but slow pointing
 control--the slowness is sufficient for PAN's purposes.
 
+ADCS Control Tasks
+==================
+
+ADCS Functionality is implemented within Flightsoftware through N seperate control tasks.
+
+ADCSMonitor
+===========
+
+Uses the ADCS Driver to make I2C calls to the ADCS Teensy (ADCSC) to request data.
+
+**execute():** On ``execute()`` ADCSMonitor it actually makes all the I2C calls and dumps the results
+into state fields.
+
+**Flags:** If a sensor reading is out of bounds, ADCSMonitor will set a corresponding
+flag as true. Otherwise, it is set to false.
+
+**Faults:** After reading the ADCS HAVT table, ADCSMonitor will ``signal()`` a corresponding fault if
+any of the wheels, or the wheel potentiometer report as not functional. Otherwise, the flag is ``unsignal()``'ed.
+
+Attitude Estimator
+==================
+
+TODO: Improve
+
+Uses data from **ADCSMonitor** and **PiksiMonitor** and gnc code to estimate the
+attiude of the spacecraft
+
+**NaN Behavior:** TODO: What happens when inputs are NaN?
+
+OrbitPropagator
+===============
+
+TODO: Improve
+
+Uses data from **ADCSMonitor**
+
+**NaN Behavior:** TODO: What happens when inputs are NaN?
+
+AttitudeComputer
+================
+
+ADCSCommander
+=============
+
+**ADCSCommander** interprets the ``adcs_state`` given from **MissionManager** and the
+desired attitude from **AttitudeComputer** to calculate desired output wheel speeds and magnetorquers.
+
+**NaN Behavior:** ???
+
+**Single Pointing Strategy:** ???
+
+**Binary Pointing Strategy:** ???
+
+ADCSController
+==============
+
+**execute():** On ``execute()``, if the ``adcs_state`` is in startup, **ADCSCommander**
+sets the ADCSC to passive mode which disables all actuation (magnetorquers and wheels)
+regardless of the MTR and Wheel commands coming from **ADCSCommander**.
+
+In all other ``adcs_states`` ADCSController will dump all the desired commands
+from **ADCSCommander** into the ADCSC using the ADCS Driver.
+
+**ADCSController:** also renews the calculation of the sun vector if
+**ADCSMonitor** reported that a previous calculation was no longer in progress.
+
+**HAVT: **
+**ADCSController** directly applies the desired HAVT reset or HAVT disable vectors to
+the ADCSC.
+
 Attitude Determination System
 =============================
 The attitude on the spacecraft is determined using a combination of three sensors:
