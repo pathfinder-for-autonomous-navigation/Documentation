@@ -38,11 +38,15 @@ Magnetometers
 -------------
 There are two magnetometers on the spacecraft.
 
-TODO
+TODO explain magnetometers
 
 Attitude Control System
 =======================
-TODO
+We achieve attitude control via 3 reaction wheels and 3 magnetorquers, one for each
+axis of the spacecraft. The wheels are controlled via "ramp command", which sets their
+angular acceleration and thus provides torque-based control over the spacecraft's attitude.
+The magnetorquers are provided a magnetic moment command, via which they can execute a torque
+on the spacecraft.
 
 The ADCS Software
 =================
@@ -76,3 +80,21 @@ In order to actuate attitude commands, the ADCS box provides registers that can 
 This list of registers is specified below.
 
 TODO insert table from Kyle's document
+
+
+Flight Software Components for ADCS
+===================================
+
+Several control tasks manage the ADCS system. They are: the ADCS box monitor,
+the ADCS attitude estimator, the ADCS computer, the ADCS commander, and the ADCS box controller.
+
+- The ADCS Box Monitor and Controller are basic device-interface control tasks that do the
+  simple job of reading sensor values and writing wheel and magnetometer commands to the ADCS peripheral.
+- The ADCS attitude estimator takes inputs from the box monitor to produce a filtered estimate of the
+  spacecraft's attitude.
+- The ADCS computer, using the high-level ADCS strategy dictated by the mission manager, creates a 
+  desired attitude and rate for the spacecraft.
+- The ADCS commander implements a control law to convert the desired attitude and rate into wheel .. admonition:: 
+  magnetorquer commands for the spacecraft.
+
+TODO insert state field names

@@ -12,13 +12,8 @@ Nominal Mission Management
 ==========================
 
 .. figure:: mission_manager.png
-   :scale: 30 %
    :align: center
    :alt: Mission manager state machine diagram
-
-   Diagram depicting the mission manager state transitions. This document is a little outdated, and
-   the text below should be considered the source of truth, but it still is a generally accurate
-   depiction of what happens in the spacecraft's mission modes.
 
 The PAN Mission Manager contains the following states:
 
@@ -77,12 +72,5 @@ powers down during the active mission phase, then the entire mission is restarte
 being in standby, but if power down happens during the post-mission phase, then the satellite restarts
 from its most recent mission state. This is achieved via saving the satellite state to EEPROM.
 
-Setting Subsystem Behavior
-==========================
-The mission manager sets states and modes of the spacecraft subsystems to achieve its desired behavior.
-See :doc:`states_and_modes` to understand the difference between states and modes.
-
-Fault Management
-================
-Call Paul Blart, the Mall's Cop
-TODO
+To achieve the behaviors specified in each of these states, the mission manager sets states of the spacecraft
+subsystems (propulsion, radio, ADCS, and docking system) to achieve its desired behavior.
