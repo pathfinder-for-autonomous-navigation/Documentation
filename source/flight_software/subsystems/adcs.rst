@@ -8,76 +8,6 @@ its own microcontroller, a Teensy 3.6, that runs a specialized software and is c
 to the Flight Controller Teensy over I2C. The ADCS box provides fairly robust but slow pointing
 control--the slowness is sufficient for PAN's purposes.
 
-ADCS Control Tasks
-==================
-
-ADCS Functionality is implemented within Flightsoftware through N seperate control tasks.
-
-ADCSMonitor
-===========
-
-Uses the ADCS Driver to make I2C calls to the ADCS Teensy (ADCSC) to request data.
-
-**execute():** On ``execute()`` ADCSMonitor it actually makes all the I2C calls and dumps the results
-into state fields.
-
-**Flags:** If a sensor reading is out of bounds, ADCSMonitor will set a corresponding
-flag as true. Otherwise, it is set to false.
-
-**Faults:** After reading the ADCS HAVT table, ADCSMonitor will ``signal()`` a corresponding fault if
-any of the wheels, or the wheel potentiometer report as not functional. Otherwise, the flag is ``unsignal()``'ed.
-
-Attitude Estimator
-==================
-
-TODO: Improve
-
-Uses data from **ADCSMonitor** and **PiksiMonitor** and gnc code to estimate the
-attiude of the spacecraft
-
-**NaN Behavior:** TODO: What happens when inputs are NaN?
-
-OrbitPropagator
-===============
-
-TODO: Improve
-
-Uses data from **ADCSMonitor**
-
-**NaN Behavior:** TODO: What happens when inputs are NaN?
-
-AttitudeComputer
-================
-
-ADCSCommander
-=============
-
-**ADCSCommander** interprets the ``adcs_state`` given from **MissionManager** and the
-desired attitude from **AttitudeComputer** to calculate desired output wheel speeds and magnetorquers.
-
-**NaN Behavior:** ???
-
-**Single Pointing Strategy:** ???
-
-**Binary Pointing Strategy:** ???
-
-ADCSController
-==============
-
-**execute():** On ``execute()``, if the ``adcs_state`` is in startup, **ADCSCommander**
-sets the ADCSC to passive mode which disables all actuation (magnetorquers and wheels)
-regardless of the MTR and Wheel commands coming from **ADCSCommander**.
-
-In all other ``adcs_states`` ADCSController will dump all the desired commands
-from **ADCSCommander** into the ADCSC using the ADCS Driver.
-
-**ADCSController:** also renews the calculation of the sun vector if
-**ADCSMonitor** reported that a previous calculation was no longer in progress.
-
-**HAVT: **
-**ADCSController** directly applies the desired HAVT reset or HAVT disable vectors to
-the ADCSC.
-
 Attitude Determination System
 =============================
 The attitude on the spacecraft is determined using a combination of three sensors:
@@ -160,11 +90,35 @@ the ADCS attitude estimator, the ADCS computer, the ADCS commander, and the ADCS
 
 - The ADCS Box Monitor and Controller are basic device-interface control tasks that do the
   simple job of reading sensor values and writing wheel and magnetometer commands to the ADCS peripheral.
+
+    - ADCS Box Monitor-specific behaviors:
+
+      - If a sensor reading is out of bounds, ADCSBoxMonitor will set a corresponding flag as true. Otherwise, it is set to false.
+      - After reading the ADCS HAVT table, ADCSBoxMonitor will ``signal()`` a corresponding fault if
+        any of the wheels, or the wheel potentiometer report as not functional. Otherwise, the flag is ``unsignal()``'ed.
+
+    - ADCS Box Controller-specific behaviors:
+     
+      - Renews the calculation of the sun vector if **ADCSMonitor** reported that a previous calculation was no longer in progress.
+      - Applies the desired HAVT reset or HAVT disable vectors to the ADCS box.
+
 - The ADCS attitude estimator takes inputs from the box monitor to produce a filtered estimate of the
   spacecraft's attitude.
+
+  TODO: What happens when inputs are NaN?
+
 - The ADCS computer, using the high-level ADCS strategy dictated by the mission manager, creates a 
-  desired attitude and rate for the spacecraft.
-- The ADCS commander implements a control law to convert the desired attitude and rate into wheel .. admonition:: 
+  desired attitude for the spacecraft.
+
+  The desired attitude is provided via four vectors: a "primary" pointing objective; the body vector that should
+  be aligned with the primary pointing objective; and the "second" pointing objective and body vector. 
+
+- The ADCS commander implements a control law to convert the desired attitude and rate into wheel and
   magnetorquer commands for the spacecraft.
+
+  - If the ``adcs_state`` is in startup, this control task sets the ADCS box to passive mode which disables
+    all actuation (magnetorquers and wheels) regardless of the MTR and Wheel commands coming from **ADCSCommander**.
+    In all other ``adcs_states`` ADCSController will dump all the desired commands from **ADCSCommander** into the
+    ADCS box using the ADCS Driver.
 
 TODO insert state field names
