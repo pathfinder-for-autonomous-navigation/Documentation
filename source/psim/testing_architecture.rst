@@ -22,7 +22,6 @@ Software Stack
 ==============
 
 .. figure:: testing_architecture.png
-   :scale: 30 %
    :align: center
    :alt: Testing architecture
 

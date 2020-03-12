@@ -12,13 +12,8 @@ Nominal Mission Management
 ==========================
 
 .. figure:: mission_manager.png
-   :scale: 30 %
    :align: center
    :alt: Mission manager state machine diagram
-
-   Diagram depicting the mission manager state transitions. This document is a little outdated, and
-   the text below should be considered the source of truth, but it still is a generally accurate
-   depiction of what happens in the spacecraft's mission modes.
 
 The PAN Mission Manager contains the following states:
 
@@ -44,15 +39,21 @@ The PAN Mission Manager contains the following states:
 
 - The "PAN-specific" states, which are very specific to the PAN mission.
 
-  - **Follower**: During this state the satellite points itself in the direction of the other satellite,
+  - **Follower**: During this state the satellite points itself to maximize comms + power,
     and executes propulsion manuevers that match its orbit and phase with the leader and satellite. The
     leader's position is continuously provided via ground uplink to the follower.
 
-    Once the ground software determines that the two satellites are fairly close together, it can send
-    an uplink command to move the satellite into "Docking" state. This determination is
-    dependent on the follower and leader satellites achieving CDGPS lock (see :doc:`subsystems/gps`).
-
   - **Leader**: This state is the same as the follower state except that propulsion commands are disabled.
+
+  - **Follower Close Approach**: During this state the satellite does the same things as in the "follower"
+    state except it points towards the other satellite.
+
+    Once the two satellites are fairly close together, they both move into the "Docking" state. This
+    determination is dependent on the follower and leader satellites achieving CDGPS lock
+    (see :doc:`subsystems/gps`).
+
+  - **Leader Close Approach**: This state is the same as the leader close approach state except that
+    propulsion commands are disabled.
 
   - **Docking**: The satellites drift towards each other passively (no propulsive or attitude guidance
     is applied), with the magnetic docking ports on the ends of the satellites causing the satellites
@@ -71,12 +72,5 @@ powers down during the active mission phase, then the entire mission is restarte
 being in standby, but if power down happens during the post-mission phase, then the satellite restarts
 from its most recent mission state. This is achieved via saving the satellite state to EEPROM.
 
-Setting Subsystem Behavior
-==========================
-The mission manager sets states and modes of the spacecraft subsystems to achieve its desired behavior.
-See :doc:`states_and_modes` to understand the difference between states and modes.
-
-Fault Management
-================
-Call Paul Blart, the Mall's Cop
-TODO
+To achieve the behaviors specified in each of these states, the mission manager sets states of the spacecraft
+subsystems (propulsion, radio, ADCS, and docking system) to achieve its desired behavior.
