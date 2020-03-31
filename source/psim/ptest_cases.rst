@@ -24,7 +24,17 @@ Writing a PTest Case
 SingleSatOnlyCase
 -----------------
 
+TODO:
 ws rs
+
+Running a Ptest Case
+--------------------
+
+Useful Commands:
+
+``ws cycle.auto true``
+
+DebugTask will no longer wait for ``cycle.start`` to be true before finishing.
 
 ADCSCheckoutCase
 ----------------
