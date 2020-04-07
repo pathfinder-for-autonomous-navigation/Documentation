@@ -21,20 +21,37 @@ See below for an inheritance diagram of the ptest case base classes:
 Writing a PTest Case
 --------------------
 
+TODO:
+
+FSWEnum
+
 SingleSatOnlyCase
 -----------------
 
-TODO:
-ws rs
+Examples of writing a state field through a ptest case:
+
+| ``self.ws("pan.state", self.mission_states.get_by_name("manual"))``
+| ``self.ws("dcdc.ADCSMotor_cmd", True)``
+| ``self.ws("adcs_cmd.rwa_speed_cmd", [0,0,0])``
+
+
+``self.ws()`` accepts the statefield name and a int, float, bool, or a list of them.
+
+Examples of a reading state field through a ptest case:
+
+| ``self.rs("adcs_monitor.mag_vec")``
+| ``self.rs("adcs_cmd.havt_reset0")``
+
+| ``self.rs()`` returns the proper type of variable associated with each state field.
+| ``self.rs("adcs_cmd.rwa_speed_cmd")`` returns a list of floats.
 
 Running a Ptest Case
 --------------------
 
 Useful Commands:
 
-``ws cycle.auto true``
-
-DebugTask will no longer wait for ``cycle.start`` to be true before finishing.
+| ``ws cycle.auto true``
+| DebugTask will no longer wait for ``cycle.start`` to be true before finishing.
 
 ADCSCheckoutCase
 ----------------
