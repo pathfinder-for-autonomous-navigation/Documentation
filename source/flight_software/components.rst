@@ -47,8 +47,11 @@ spacecraft, their types are restricted to the following list:
   in milliseconds, and ``ns``, which is an offset of +/- 1000000 nanoseconds off of the time of week.
 - ``f_vector_t``, ``d_vector_t``: Vectors, which are nothing more than a renaming of ``std::array<float, 3>``
   or ``std::array<double, 3>``.
+- ``lin::Vector3f``, ``lin::Vector3d``: These are custom-built vector classes that facilitate easy computation, much
+  of it at compile-time. See `this <https://github.com/kkrol27/lin/>`_ for more information on these utilities.
 - ``f_quat_t``, ``d_quat_t``: Quaternions, which are nothing more than a renaming of ``std::array<float, 4>``
   or ``std::array<double, 4>``.
+- ``lin::Vector4f``, ``lin::Vector4d``: Custom-built quaternion classes, again provided by ``lin``.
 
 In order to encode and decode state fields from a string representation so that they can
 be transmitted over the radio, readable and writable state fields contain a ``Serializer`` object.
@@ -79,7 +82,6 @@ Faults themselves encapsulate N different fields that are implemented as statefi
 
 - A boolean statefield that represents whether or not it is *faulted*
 - Persistence
-
 
 The State Field Registry
 ========================

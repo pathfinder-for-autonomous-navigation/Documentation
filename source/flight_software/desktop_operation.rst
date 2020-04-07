@@ -2,7 +2,7 @@
 Desktop Operation of Flight Software
 ====================================
 
-See :doc:`../psim/testing_architecture` before reading this document.
+See :doc:`ptest/testing_architecture` before reading this document.
 
 One of the great things about PAN's flight software is that it can run both on a tiny ARM-based microcontroller
 (the Teensy 3.5/3.6) and on any Linux or Mac platform. We call the latter version of flight software the
