@@ -7,14 +7,10 @@ expected or unexpected reboots of the system. For our system, the EEPROM is the 
 means of state-saving, and we have an ``EEPROMController`` control task that manages the saving
 of certain state fields to the EEPROM.
 
-Fields written to the EEPROM are all unsigned ints. Below is a list of the fields we save, the
-frequency at which we save them, and the rationale for why we save them to the EEPROM.
+Fields written to the EEPROM can either be signed/unsigned ints/chars, or booleans. This makes
+it easy to serialize or deserialize their values in and out of EEPROM. The list of EEPROM-saved
+fields can be found by running the Telemetry Info Generator (TIG); the "eeprom_saved_fields" key
+inside the produced JSON file by the telemetry info generator lists the set of state fields and their
+**saving period**, i.e. the number of cycles between queries of their value to save to the EEPROM.
 
-TODO fill out entire table
-
-+--------------------------+-----------------------+-------------------------------------------------------------+
-| State field name         | Period of Save        | Rational for saving field to EEPROM                         |
-|                          | (# of control cycles) |                                                             |
-+--------------------------+-----------------------+-------------------------------------------------------------+
-| ``ClockManager``         | 0                     |                                                             |
-+--------------------------+-----------------------+-------------------------------------------------------------+
+The EEPROM is emulated in HOOTL via a JSON file that is stored on-disk.

@@ -29,6 +29,12 @@ ranging from -1 to the total number of flows. A flow priority of -1 means that t
 and not downlinked to the ground; a flow priority of 0 is the highest priority, and a flow priority of
 ``number of flows - 1`` is a flow with the lowest priority.
 
+Flows are specified in a CSV file under `src/` in Flight Software. This CSV file is processed by a Python
+script to produce a compilable C++ file with the same data.
+
+Serializing Flows to a Stream
+-----------------------------
+
 When downlinking, the downlink producer arranges the active flows by priority in-place, and then
 writes each flow to the downlink frame in order. Writing a flow to the packet means writing the flow's ID,
 and then writing each of the serialized fields in the flow.
@@ -48,4 +54,9 @@ that can control that behavior. For example, one common ground task is to change
 the :doc:`../mission_manager` state, which it can easily do by just setting the
 value of the mission state.
 
-TODO
+The structure of an uplink packet is thus a set of key-value pairs, with the key being the uplinked
+state field's *index* in the list of uplinkable state fields, and the value being the actual value
+of the state field. The index is compressed to the minimum number of bits required to specify the maximum
+possible index, and the value of the uplinked state field must be serialized using its serializer.
+
+Uplink packets can be produced using the Uplink Producer utility, which is described in greater detail here.
