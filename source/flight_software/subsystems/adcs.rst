@@ -38,7 +38,15 @@ Magnetometers
 -------------
 There are two magnetometers on the spacecraft.
 
-TODO explain magnetometers
+MAG1:
+Todo: details about MAG1
+
+MAG2:
+Todo: details about MAG2
+
+Each magnetometer can be individually commanded between 
+``IMU_MAG_NORMAL`` and ``IMU_MAG_CALIBRATION`` modes. Data is polled from both magnetometers
+simultaneously.
 
 Attitude Control System
 =======================
