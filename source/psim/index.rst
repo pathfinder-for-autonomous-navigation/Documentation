@@ -8,5 +8,4 @@ The code for simulation software is available `here <https://github.com/pathfind
    :maxdepth: 2
    :caption: Contents:
 
-   testing_architecture
-   ptest_cases
+   psim_structure

@@ -69,7 +69,6 @@ There are a few kinds of constructors for integer serializers:
 - Also for `unsigned int` and `unsigned char` serializers, there's a no-argument constructor that sets ``max`` to 2^32 - 1 for ``unsigned int`` serializers and to 2^8 - 1 for ``unsigned char`` serializers.
 
 These serializers, in general, work as follows: the specified ``bitsize`` provides 
-TODO
 
 GPS Time Serializer
 ===================

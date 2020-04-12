@@ -2,12 +2,11 @@
 PTest Cases
 ====================
 
-PTest Cases are the special top-level testcases that can run multi-satellite, sim/no-sim HITLs/HOOTLs.
-Obviously, they hold enormous importance in ensuring the safety and reliability of our satellite, because they
-provide the highest-fidelity, most complex testing environment available to us besides the actual environment
-of space.
-
-TODO talk about structure, how to write one
+Take a read at :doc:`testing_architecture` before looking at this page. Once you do, you know
+that StateSession is the core of how a user interacts with flight software instances. The
+state command prompt provides a manual way to read and write state from flight software; ptest
+cases provide a powerful, Python-based, automated way to transact state fields. This allows
+for the creation of automated simulations and testcases on our spacecraft.
 
 See below for an inheritance diagram of the ptest case base classes:
 
@@ -19,16 +18,17 @@ See below for an inheritance diagram of the ptest case base classes:
 
 
 Writing a PTest Case
---------------------
+====================
+Is as simple as inheriting from either ``SingleSatOnlyCase`` or ``MissionCase``, as diagrammed above.
+These base classes contain some utilities for reading and writing state to either 1 or 2 satellites,
+respectively. 
 
-TODO:
+The base ptest class also exposees a set of `FSWEnum` objects which create dual-indexing of common
+flight software enums (like mission state, ADCS state, etc.) by both name and numerical value.
+See the example below of how you can set the satellite mission state to "manual".
 
-FSWEnum
 
-SingleSatOnlyCase
------------------
-
-Examples of writing a state field through a ptest case:
+Examples of writing a state field through a ptest case derived from ``SingleSatOnlyCase``:
 
 | ``self.ws("pan.state", self.mission_states.get_by_name("manual"))``
 | ``self.ws("dcdc.ADCSMotor_cmd", True)``
@@ -37,7 +37,7 @@ Examples of writing a state field through a ptest case:
 
 ``self.ws()`` accepts the statefield name and a int, float, bool, or a list of them.
 
-Examples of a reading state field through a ptest case:
+Examples of a reading state field through a ptest case derived from ``SingleSatOnlyCase``:
 
 | ``self.rs("adcs_monitor.mag_vec")``
 | ``self.rs("adcs_cmd.havt_reset0")``
@@ -45,13 +45,8 @@ Examples of a reading state field through a ptest case:
 | ``self.rs()`` returns the proper type of variable associated with each state field.
 | ``self.rs("adcs_cmd.rwa_speed_cmd")`` returns a list of floats.
 
-Running a Ptest Case
---------------------
-
-Useful Commands:
-
-| ``ws cycle.auto true``
-| DebugTask will no longer wait for ``cycle.start`` to be true before finishing.
+Listing of Ptest Cases
+======================
 
 ADCSCheckoutCase
 ----------------
