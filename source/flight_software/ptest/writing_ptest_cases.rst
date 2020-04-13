@@ -82,7 +82,7 @@ and that the magnitude of the readings are reasonable
 (within expected earth magnetic field strength expectations).
 
 MAG Independence Checkout
-############
+#########################
 
 If both magnetometers are functional, this test section will disable MAG1, and check that MAG2
 still works. The same checkout is performed on MAG1 with MAG2 disabled. The independence checkouts 
