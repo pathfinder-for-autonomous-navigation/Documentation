@@ -73,13 +73,20 @@ the user is alerted.
 Then all devices are disabled and reset, to make sure the devices are all properly cycled,
 and returned to the initially read HAVT table.
 
-IMU Checkout
+MAG Checkout
 ############
 
 The checkout case pulls ten readings from the mag, ``cycle()`` ing the FC between each reading.
 It checks to make sure the readings change over time, 
 and that the magnitude of the readings are reasonable 
-(withim expected earth magnetic field strength expectations).
+(within expected earth magnetic field strength expectations).
+
+MAG Independence Checkout
+#########################
+
+If both magnetometers are functional, this test section will disable MAG1, and check that MAG2
+still works. The same checkout is performed on MAG1 with MAG2 disabled. The independence checkouts 
+re-run the same checkouts as above.
 
 GYR Checkout
 ############
