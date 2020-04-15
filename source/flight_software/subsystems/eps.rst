@@ -29,6 +29,11 @@ control cycle. This housekeeping packet contains the following important element
 
 TODO
 
+Commanding
+==========
+
+The gomspace will only set PV voltages when the Power Point Tracking mode is in ``Fixed``.
+
 Power cycling
 =============
 TODO
