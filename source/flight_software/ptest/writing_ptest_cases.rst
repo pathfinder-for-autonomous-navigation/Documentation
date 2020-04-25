@@ -96,3 +96,22 @@ It checks to make sure the readings change over time, and that the magnitude of 
 
 TODO FURTHER CHECKOUTS
 ######################
+
+PiksiCheckoutCase
+-----------------
+
+The PiksiCheckoutCase continuously reads data from the Piksi device.
+
+It first performs a series of 10 readings for the user to glimpse at the data coming in. Then a series
+of 100 readings are performed. It checks to make sure that the most common mode of return is a nominal one 
+or a nominal combination.
+
+If not a TestCaseAssertion is thrown, indicating that the Piksi is likely not functioning as intended.
+
+For each vector that is available, it that the vector changes with time, and that the magnitude of the 
+entire vector is within expected bounds.
+
+Position should be within 10 km of 6371 km. Velocity is within 4 m/s, and that the baseline vector is within 100 m.
+
+The user must then check that the Piksi is functioning as expected from the diagnostic data given the condition of the 
+test bed.
