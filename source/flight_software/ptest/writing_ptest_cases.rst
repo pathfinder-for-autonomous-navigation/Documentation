@@ -94,6 +94,21 @@ GYR Checkout
 The checkout case pulls ten readings from the gyro, ``cycle()`` ing the FC between each reading.
 It checks to make sure the readings change over time, and that the magnitude of the readings are reasonable.
 
+Wheel Checkout
+##############
+
+The wheels are put into ``RWA_SPEED_CTRL`` and it checks that the speed read is reasonably close to 
+the speed read for a series of tests. 
+
+The wheels are then put ``RWA_TORQUE_CTRL`` and it checks that the torque read is close to the actual
+torque read for a series of tests.
+
+SSA Checkout
+############
+
+Each Sun Sensor is polled for its voltage, and the ``sum_of_differentials`` method is used to check that 
+the sensors change over time. Alternatively it is just manually inspected.
+
 TODO FURTHER CHECKOUTS
 ######################
 
