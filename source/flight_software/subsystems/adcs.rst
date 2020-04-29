@@ -34,6 +34,9 @@ does not drift due to thermal fluctuations, the gyroscope is embedded underneath
 heating device that operates via a bang-bang controller. The setpoint of the controller is
 managed by the Flight Controller.
 
+By default the gyro heater is disabled until enabled by FSW. It has a default PWM strength of 255
+(3.3V) and a default target temperature of 20C.
+
 Magnetometers
 -------------
 There are two magnetometers on the spacecraft.
