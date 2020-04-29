@@ -130,3 +130,14 @@ Position should be within 10 km of 6371 km. Velocity is within 4 m/s, and that t
 
 The user must then check that the Piksi is functioning as expected from the diagnostic data given the condition of the 
 test bed.
+
+GyroHeaterDiag(nostic)Case
+--------------------------
+
+This case is a diganostic case, meant for manual verification that the gyro heater is working.
+
+It sets a target temperature, and a given pwm, and records data for 2 minutes as the gyro temperature increases
+and holds at the target temp. 
+
+It automatically shutsdown the test by turning off the gyro heater if the temperature rises too far or if either the
+gyro or gyro heater report as non functional.
