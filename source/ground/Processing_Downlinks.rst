@@ -1,6 +1,6 @@
-==========================
-Recieving Downlinks
-==========================
+=================================
+Processing and Storing Downlinks
+=================================
 
 ElasticSearch
 ==============
@@ -21,14 +21,14 @@ ElasticSearch is a database that allows us to organize information into various 
 Every radio has their own Iridium Report index and Statefield Report index to store telemetry information in ElasticSearch. This allows us to distinguish the statefield and telemetry information for each satellite.
 
 
-Flask Server
-=============
+Email Processor
+================
 Telemetry is sent from the satellite to the PAN email account via the Iridium Satellite Constellation Network in compressed serialized packets. These
 packets contain special information and data about the satellites that we need to store and index. This is accomplished by a server written with Flask 
-(a.k.a the "Flask server") which continuously reads unread emails from the Iridium Network, parses the data that comes from the satellite in the form of 
+which continuously reads unread emails from the Iridium Network, parses the data that comes from the satellite in the form of 
 an email attachment, and stores that parsed information in an Elasticsearch database. 
 
-When the Flask server is started, it opens a thread `check_email_thread`, which will continuously do the following:
+When the email processor is started, it opens a thread `check_email_thread`, which will continuously do the following:
 
 #. Read the most recent unread email received from the Iridium email account.
 
@@ -48,31 +48,11 @@ When the Flask server is started, it opens a thread `check_email_thread`, which 
 
 #. The thread delays for 10 seconds to reduce CPU bandwidth
 
-
-
-The Flask server also has an endpoint from which we can access data from the ElasticSearch database. This endpoint requires two queries: the IMEI number of 
+Reading Stored Telemetry 
+=========================
+The email processor also has an endpoint from which we can access data from the ElasticSearch database. This endpoint requires two queries: the IMEI number of 
 the radio you want telemetry information from, and the specific statefield that you want to know the most recent value of. The Flask server will then search 
 for the statefield report index based on the given IMEI number, and the search within that index for the value of the most recent statefield that was requested.
 
 This endpoint is used for reading statefield information from a satellite when opening a RadioSession to a certain radio. It is also used by RadioSession to confirm whether 
 or not the ground is cleared to send more uplinks (i.e if there aren't any messages already queued to be sent to the satellite).
-
-Downlink Parser
-================
-The data coming from the satellite must be serialized and compressed because we are only able to send 70 bytes of information at a time over radio. 
-Thus, it is necessary to compress and then parse data from the satellite to ensure we can recieve as much information as possible whenever we are able
-to establish communication.
-
-As the thread in the Flask server reads unread emails from the Iridium network, it needs to be able to parse the serialized information and data into a readable
-JSON object (ElasticSearch only accepts JSON objects). This is the job of the Downlink Parser. 
-
-I recommend reading these two sections to better understand how downlink information is compressed and sent over radio to get a better sense of
-how downlink data is parsed:
-
-* `How satellite information is serialized  <https://pan-software.readthedocs.io/en/latest/flight_software/serializer.html>`_.
-
-* `How serialized satellite information is organized and sent over radio <https://pan-software.readthedocs.io/en/latest/flight_software/subsystems/telemetry.html#downlink-producer>`_.
-
-The downlink parser reads files/packets containing the statefield information of a groups of flows with varying priorities and processes them at a bit level. If the first bit of a packet is 1, then that signifies the start of a new downlink frame. 
-The downlink producer will continue to read serialized data until it recieves another frame that starts with 1. Once the downlink parser reads the next packet that starts with 1, that means the previous frame is finished and the downlink parser 
-returns the most recently collected frame as a JSON object.
