@@ -85,8 +85,8 @@ Faults themselves encapsulate N different fields that are implemented as statefi
 
 The State Field Registry
 ========================
-The state field registry contains lists of pointers to readable, writable, and internal state fields,
-along with functions to find and add state fields' pointers to the registry.
+The state field registry contains lists of pointers to events, faults, and readable, writable, and internal 
+state fields, along with functions to find and add events', faults', state fields' pointers to the registry.
 
 The purpose of the registry is to enable encapsulation. Upon construction, control tasks receive a reference
 to a State Field Registry object that is shared across all control tasks. The control tasks can then

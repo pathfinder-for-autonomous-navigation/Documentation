@@ -131,13 +131,36 @@ Position should be within 10 km of 6371 km. Velocity is within 4 m/s, and that t
 The user must then check that the Piksi is functioning as expected from the diagnostic data given the condition of the 
 test bed.
 
+Deployment to Initialization Hold Checkout Case
+------------------------------------------------
+This checkout case confirms that, if the satellite is deployed and all the ADCS devices are functional, then the 
+satellite will move to ``detumble``. If the satellite is deployed and if one or more of the ADCS devices are not functional,
+then the satellite moves to ``initialization hold``.
+
+First, the checkout case moves the satellite to ``startup`` and waits the full deployment period. Then, the checkout 
+case tests each of the following scenarios:
+
+1) **All ADCS Devices are functional:** The case unsignals all the listed faults and checks that the satellite moves to ``detumble``.
+2) **ADCS is not functional:** This fault could occur if I2C communication between the flight computer and the ADCS fails. The 
+   checkout case will signal the ``adcs.functional`` fault and check that the satellite moves to ``initialization_hold``.
+3) **ADCS Wheels 1-3 are not functional:** The ADCS wheels allow the satellite to adjust its orientation in space. The case will trip each
+   of the ADCS wheel faults, one-by-one, and check that the satellite moves to ``initialization_hold`` each time.
+4) **ADCS Potentiometer is not functional:** The ADCS potentiometer is a variable resistor that controls the torques that 
+   the motors operate with. The checkout signals ``adcs_monitor.wheel_pot_fault`` and checks that the satellite moves to ``initialization_hold``.
+
+DCDC Checkout Case
+-------------------
+The DCDC checkout case verifies that we are able to control the values of the DCDC pins: ``ADCSMotorDCDC_EN``, which brings power to the
+ADCS system, and ``SpikeDockDCDC_EN`` which brings power to the propulsion and docking systems. The checkout case also verifies that we 
+can reset and disable these pins from the ground.
+
 GomspaceCheckoutCase
-####################
+--------------------
 
 The GomspaceCheckoutCase tests the readable state fields read from the Gomspace and compares them to the expected values from its datasheet and manual. The case also tests that writable fields can be properly set and that powercycling is successful. The test case will log any incorrect or unsuccessful reads/writes.
 
 DockingCheckoutCase
-###################
+--------------------
 
 The DockingCheckoutCase is meant that we can write and read to the docking system's state fields, and in HITL is also meant to test that the motor turns the expected amount with the currently set values for step angle and delay.
 

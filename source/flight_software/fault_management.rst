@@ -54,7 +54,15 @@ This handler exists to manage long durations of comms blackouts. The fault respo
 
 **Piksi Fault Handler**
 
-TODO
+This handler manages long durations during which we are unable to establish a real-time kinematic (RTK) GPS fixes. The fault
+handler recommends moving the satellite to standby if any of the following three situations occur:
+
+- If the Piksi has been unable to collect GPS data for a extended duration (i.e the Piksi is dead)
+
+- If the satellite are in close approach, but the Piksi has been unable to get an RTK fix for a configurable wait period.
+
+- If the satellites are in a close approach state and the Piksi has been able to get RTK fixes while in close approach, 
+  but then the Piksi stops getting RTK fixes for a configurable wait period. 
 
 
 Fault Response
