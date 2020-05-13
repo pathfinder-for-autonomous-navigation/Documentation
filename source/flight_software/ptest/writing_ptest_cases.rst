@@ -130,3 +130,16 @@ Position should be within 10 km of 6371 km. Velocity is within 4 m/s, and that t
 
 The user must then check that the Piksi is functioning as expected from the diagnostic data given the condition of the 
 test bed.
+
+GomspaceCheckoutCase
+####################
+
+The GomspaceCheckoutCase tests the readable state fields read from the Gomspace and compares them to the expected values from its datasheet and manual. The case also tests that writable fields can be properly set and that powercycling is successful. The test case will log any incorrect or unsuccessful reads/writes.
+
+DockingCheckoutCase
+###################
+
+The DockingCheckoutCase is meant that we can write and read to the docking system's state fields, and in HITL is also meant to test that the motor turns the expected amount with the currently set values for step angle and delay.
+
+The test case logs the state of all the fields as it runs. It first checks that the configuration is undocked in the undocked magnet configuration and not turning, and that the configuration is commanded to be in the docked position. The initial step angle and delay are verified, and then the system is sent the command to undock and then to dock again.  
+Then, the step angle and step delay are written to different values and the process is repeated. There should be a noticeable difference in speed, but overall each dock and undock command should take around a minute.  
