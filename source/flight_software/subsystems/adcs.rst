@@ -89,6 +89,26 @@ This list of registers is specified below.
 
 TODO insert table from Kyle's document
 
+ADCS Hardware Availability Table (HAVT)
+---------------------------------------
+
+For every ``Device`` connected to the ADCS Teensy, the Teensy tracks the "functionality" state
+of the ``Device``. If it is disabled, then if the device is an actuator, no actuations will be performed.
+If the ``Device`` is an ``I2CDevice``, then no I2C transactions will occur with that device.
+
+Internally within ADCS Software, there is a Hardware Availablility Table that reports the funct ionality state 
+of each device. I2C devices automatically disable (set their functionality state to false) themselves if 
+too many consecutive I2C transactions fail. All devices are initially enabled ADCS Teensy boot, so if 
+all ``setup()`` calls are succesful, the initial HAVT table will be represented by a bitset of all ``1``'s.
+
+The ADCS Teensy has a read register dedicated to reading the state of the HAVT table.
+There are two seperate command registers to intewith the HAVT table, one for commanding ``reset()``'s,
+and another for commanding ``disable()``s. All three are represented as a 32 bit long ``std::bitset``'s.
+
+On every ADCS cycle, the ADCS Teensy will actuate a ``reset()`` or ``disable()`` if the index of the 
+command table corresponding to a device has a ``1`` in that position. 
+Therefore, nominally the reset and disable command registers are all commanded as ``0``'s from the 
+FSW Teensy. 
 
 Flight Software Components for ADCS
 ===================================
