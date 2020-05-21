@@ -103,7 +103,7 @@ all ``setup()`` calls are succesful, the initial HAVT table will be represented 
 
 The ADCS Teensy has a read register dedicated to reading the state of the HAVT table.
 There are two seperate command registers to intewith the HAVT table, one for commanding ``reset()``'s,
-and another for commanding ``disable()``s. All three are represented as a 32 bit long ``std::bitset``'s.
+and another for commanding ``disable()``'s. All three are represented as a 32 bit long bitsets.
 
 On every ADCS cycle, the ADCS Teensy will actuate a ``reset()`` or ``disable()`` if the index of the 
 command table corresponding to a device has a ``1`` in that position. 
