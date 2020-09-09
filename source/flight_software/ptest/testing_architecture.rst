@@ -6,16 +6,16 @@ PTest Software Stack
    :align: center
    :alt: Testing architecture
 
-At the core of the simulation architecture is the **StateSession**. This is an integration
+At the core of the simulation architecture is the **USBSession**. This is an integration
 class that either connects to a Teensy running flight software or to a desktop binary executable,
 and allows exchanging state fields with the flight software.
 
-Related to the **StateSession** is the **RadioSession**, which creates a connection to the
+Related to the **USBSession** is the **RadioSession**, which creates a connection to the
 email account that PAN uses to talk to the Iridium satellite network. Using this email account,
 the **RadioSession** is able to interpret downlinks and send uplinks when requested by the
 simulation.
 
-At the top level, the **SimulationRun** architects the **Simulation**, any **StateSession**
+At the top level, the **SimulationRun** architects the **Simulation**, any **USBSession**
 objects, any **RadioSession** objects, the **StateCmdPrompt**, and **Datastore** and **Logger**
 objects required by the state sessions, simulation, and radio session.
 
@@ -39,7 +39,7 @@ meaningful test behavior. The user has access to a wide selection of commands:
       > rs pan.cycle_no
       3                                               (Completed in 651 us)
 
-  You can find the actual implementation for these commands in ``StateSession`` and ``RadioSession``.
+  You can find the actual implementation for these commands in ``USBSession`` and ``RadioSession``.
 
 - ``cycle`` is shorthand for ``ws cycle.start`` (advancing the flight software cycle by 1) and ``cyclecount``
   is shorthand for ``rs pan.cycle_no``.

@@ -3,7 +3,7 @@ PTest Cases
 ====================
 
 Take a read at :doc:`testing_architecture` before looking at this page. Once you do, you know
-that StateSession is the core of how a user interacts with flight software instances. The
+that USBSession is the core of how a user interacts with flight software instances. The
 state command prompt provides a manual way to read and write state from flight software; ptest
 cases provide a powerful, Python-based, automated way to transact state fields. This allows
 for the creation of automated simulations and testcases on our spacecraft.
