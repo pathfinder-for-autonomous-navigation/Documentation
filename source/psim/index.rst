@@ -3,6 +3,8 @@
 GNC and Simulation Software Documentation
 ============================================
 
+The repository for GNC and simulation software is `here <https://github.com/pathfinder-for-autonomous-navigation/psim/>`_.
+
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
@@ -11,5 +13,3 @@ GNC and Simulation Software Documentation
    installation_guide
    running_a_simulation
    development_guide/index
-
-The code for simulation software is available `here <https://github.com/pathfinder-for-autonomous-navigation/psim/>`_.
