@@ -204,3 +204,9 @@ Recreating you're :ref:`psim-installation-guide-python-virtual-environment` with
    python -m venv venv --system-site-packages
    source venv/bin/activate
    ...
+
+The Nuclear Option
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+If all else fails, it's worth trying to clone a fresh copy of the repository and attempt setup again from the beginning.
+It has been necessary on a couple rare occasions where we've never been able to reproduce the error.
