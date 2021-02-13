@@ -144,6 +144,36 @@ To verify the ``psim`` module is installed and functioning, run:
 and, if interested, continue on to :ref:`psim-running-a-simulation` to run a full simulation with your new Python module.
 
 
+.. _psim-installation-guide-intellisense-support:
+
+Intellisense Support
+------------------------------
+
+Bazel doesn't play nicely with VSCode's existing C++ intellisense extensions on it's own.
+In order to get intellisense working with the Bazel targets, run the following setup command once:
+
+.. code-block:: bash
+
+   ./tools/bazel-compilation-database.sh
+
+which will install a scripting tool called ``bazel-compdb`` to ``~/.local/bin`` on your machine.
+Please ensure you have a ``~/.local/bin`` directory on your machine and it's in your ``PATH``.
+
+.. note::
+
+   It's possible to install the tool in a different directory if you'd prefer not to use ``~/.local/bin``.
+   Simply edit the ``tools/bazel-compilation-database.sh`` script accordingly.
+
+Once installed, simply call:
+
+.. code-block:: bash
+
+   bazel-compdb
+
+periodically from the root of the repository.
+It will generate a ``compile-commands.json`` file that the VSCode extensions will read and intellisense should start working.
+
+
 .. _psim-installation-guide-common-problems:
 
 Common Problems
