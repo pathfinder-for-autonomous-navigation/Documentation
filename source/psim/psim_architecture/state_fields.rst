@@ -5,7 +5,7 @@
 State Fields
 ==============================
 
-All data sharing between :ref:`models <psim-psim-architecture-models>` within a :ref:`simulation <psim-psim-architecture-simulations>` as well as transactions to and from Python happen via state field reads and writes.
+All data sharing between :ref:`models <psim-psim-architecture-models>` within a :ref:`simulation <psim-psim-architecture-simulation>` as well as transactions to and from Python happen via state field reads and writes.
 Here, the two main types of supported state fields will be described along with their intended use cases.
 
 

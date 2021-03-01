@@ -1,5 +1,5 @@
 
-.. _psim-psim-architecture-simulations:
+.. _psim-psim-architecture-simulation:
 
 ==============================
 Simulations
