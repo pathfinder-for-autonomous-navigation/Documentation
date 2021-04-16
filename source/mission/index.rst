@@ -4,16 +4,19 @@ Full Mission Simulation
 
 This section of the documentation will guide you through the startup of PTest/GSW for Full Mission Simualtions
 
+=================================
 First Time Setup:
+=================================
 Make sure you have bazel installed
 Make sure you have your venv installed and ready to going
-Make sure you have elasticsearch instaled
+Make sure you have elasticsearch instaled:
+This link worked for me on Ubuntu 20.04 (WSL2):
+https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-elasticsearch-on-ubuntu-20-04
 
-Do this every time setup:
 
-.. code:: bash
-
-   python -m ptest runsim -c ptest/configs/hitl_singlesat.json -t CheckBatteryLevel -ni
+=================================
+Every Time Setup:
+=================================
 
 From the FSW repo:
 Make sure your submodules are up to date:
@@ -37,11 +40,19 @@ For example:
    pio run -e fsw_native_follower
    pio run -e fsw_native_leader_autotelem
 
+=================================
+Spooling up the Stack:
+=================================
+
 Start ElasticSearch:
+If you don't have systemd:
 
 .. code:: bash
 
-   idk lmao
+   sudo -i service elasticsearch start
+
+If you do have systemd, you can set elasticsearch to startup everytime with:
+https://www.elastic.co/guide/en/elasticsearch/reference/current/starting-elasticsearch.html
 
 In a seperate terminal: Start TLM:
 
@@ -70,7 +81,8 @@ Make sure to specify a ptest/config that uses a specific config:
    npm start ptest/configs/ask_duncan_to_update_this.json
 
 .. toctree::
-  :maxdepth: 2
-  :caption: Contents:
+   :maxdepth: 2
+   :caption: Contents:
 
-  FAQ
+   FAQ
+   Debugging
