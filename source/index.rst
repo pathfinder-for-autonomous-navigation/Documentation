@@ -12,3 +12,4 @@ project, a part of `Space System Design Studio <https://spacecraftresearch.com/>
    flight_software/index
    psim/index
    ground/index
+   mission/index
