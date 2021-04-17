@@ -64,7 +64,7 @@ In a seperate terminal: Start a DualPsim Case with autotelem:
 
 .. code:: bash
 
-   python -m ptest runsim -c ptest/configs/hootl_hootl_autotelem.json -t DualPsim
+   python -m ptest runsim -c ptest/configs/hootl_hootl_autotelem.json -t DualPSim
    
 In a seperate terminal: Start an AutonomousMissionController with:
 
