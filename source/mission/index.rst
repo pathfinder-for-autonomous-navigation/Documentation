@@ -60,17 +60,30 @@ In a seperate terminal: Start TLM:
 
    python -m tlm
    
-In a seperate terminal: Start a DualPsim Case with autotelem:
+In a seperate terminal: Start a Case that puts the satellite in the desired simulation level:
+Pick one of the following (AND CONFIGURE IMEI NUMBERS!!!):
 
 .. code:: bash
 
-   python -m ptest runsim -c ptest/configs/hootl_hootl_autotelem.json -t DualPsim
+   python -m ptest runsim -c ptest/configs/hootl_autotelem.json -t SingleSatStandbyCase
    
+.. code:: bash
+
+   python -m ptest runsim -c ptest/configs/hootl_autotelem.json -t SingleSatStartupCase
+ 
+.. code:: bash
+
+   python -m ptest runsim -c ptest/configs/hootl_hootl_autotelem.json -t DualSatStandbyCase
+ 
+.. code:: bash
+
+   python -m ptest runsim -c ptest/configs/hootl_hootl_autotelem.json -t DualSatStartupCase
+ 
 In a seperate terminal: Start an AutonomousMissionController with:
 
 .. code:: bash
 
-   python -m ptest runsim -c ptest/configs/??? -t AutonomousMissionController
+   python -m ptest runsim -c ptest/configs/amc.json -t AutonomousMissionController
    
 In a seperate terminal: Start MCT with:
 Make sure to specify a ptest/config that uses a specific config:
