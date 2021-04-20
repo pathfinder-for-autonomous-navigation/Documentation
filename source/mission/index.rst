@@ -91,7 +91,7 @@ Make sure to specify a ptest/config that uses a specific config:
 .. code::bash
 
    cd MCT
-   npm start ptest/configs/ask_duncan_to_update_this.json
+   npm start ptest/configs/hootl_hootl_autotelem.json
 
 .. toctree::
    :maxdepth: 2

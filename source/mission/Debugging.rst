@@ -10,15 +10,14 @@ Start ElasticSearch:
 
    idk lmao
 
-In a seperate terminal: Start TLM:
-
+Look at what is inside elasticsearch:
 .. code:: bash
 
-   python -m tlm
+   curl http://localhost:9200/_aliases?pretty=true
 
 If you ever see any problem with PSim first try this!!!!
 
 .. code:: bash
-   
+
    git submodule update --init --recursive
    pip install -e lib/common/psim
