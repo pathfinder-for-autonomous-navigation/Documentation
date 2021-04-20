@@ -21,3 +21,9 @@ If you ever see any problem with PSim first try this!!!!
 
    git submodule update --init --recursive
    pip install -e lib/common/psim
+
+Anything with the whole MCT/PTest Stack:
+Are you sure elasticsearch was started?
+Are you sure tlm was started?
+Are you sure PTest is running?
+Are you sure MCT is running?

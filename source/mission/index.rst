@@ -103,5 +103,4 @@ Make sure to specify a ptest/config that uses a specific config:
    :maxdepth: 2
    :caption: Contents:
 
-   FAQ
    Debugging
