@@ -51,6 +51,12 @@ If you don't have systemd:
 
    sudo -i service elasticsearch start
 
+On MacOS:
+
+.. code:: bash
+
+   elasticsearch
+
 If you do have systemd, you can set elasticsearch to startup everytime with:
 https://www.elastic.co/guide/en/elasticsearch/reference/current/starting-elasticsearch.html
 
@@ -85,10 +91,10 @@ In a seperate terminal: Start an AutonomousMissionController with:
 
    python -m ptest runsim -c ptest/configs/amc.json -t AutonomousMissionController
    
-In a seperate terminal: Start MCT with:
+In a seperate terminal: Start MCT inside FlightSoftware/MCT:
 Make sure to specify a ptest/config that uses a specific config:
 
-.. code::bash
+.. code:: bash
 
    cd MCT
    npm start ptest/configs/hootl_hootl_autotelem.json
