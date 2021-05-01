@@ -33,7 +33,7 @@ I'd recommend checking out `this`__ Arch Wiki page for information on basic ``sy
 
 __ https://wiki.archlinux.org/index.php/systemd#Basic_systemctl_usage
 
-For those running on Mac, EsticSearch can be started with
+For those running on Mac, ElasticSearch can be started with
 
 .. code-block:: bash
 
@@ -67,7 +67,7 @@ where the testcase name boots into the desired mission scenario (either startup,
 Note that, generally speaking, the autotelem feature is desired for full mission cases so OpenMCT actually gets populated with data.
 This is why we're running with a ``*_autotelem.json`` configuration.
 
-Please remember to configure the IMEI numbers in the ``hootl_hootl+autotelem.json`` file.
+Please remember to configure the IMEI numbers in the ``hootl_hootl_autotelem.json`` file.
 Failing to make these numbers unique to your own machine could cause email collisions between simulations being run by different PAN members.
 
 
@@ -95,4 +95,4 @@ Assuming OpenMCT was already installed, the server can be started with
 .. code-block:: bash
 
    cd MCT
-   npm start ../ptest/configs/hootl_hoolt_autotelem.json
+   npm start ../ptest/configs/hootl_hitl_autotelem.json
