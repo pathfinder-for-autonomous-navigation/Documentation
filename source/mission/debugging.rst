@@ -1,6 +1,7 @@
-=================================
+
+==============================
 Debugging
-=================================
+==============================
 
 Intercept a specific value out of elasticsearch:
 
@@ -10,7 +11,7 @@ Start ElasticSearch:
 
    idk lmao
 
-In a seperate terminal: Start TLM:
+In a separate terminal: Start TLM:
 
 .. code:: bash
 
