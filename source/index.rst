@@ -13,3 +13,4 @@ project, a part of `Space System Design Studio <https://spacecraftresearch.com/>
    psim/index
    ground/index
    mission/index
+   lessons/index
