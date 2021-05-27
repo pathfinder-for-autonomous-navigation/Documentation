@@ -8,6 +8,7 @@ documentation is woven together. This section is primarily meant to be *design* 
 although there is some user documentation as well.
 
 Mechanical
+==========
 
 Any power supply of a subsystem that we need to verify is "on" should have its own indicator LED light 
 or it should have contacts on the exterior to check with a multimeter.
