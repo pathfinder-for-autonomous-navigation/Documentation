@@ -1,19 +1,29 @@
-=================================
+
+==============================
 Debugging
-=================================
+==============================
 
 Intercept a specific value out of elasticsearch:
+
+.. code:: bash
+
+   ???
 
 Start ElasticSearch:
 
 .. code:: bash
 
-   idk lmao
+   sudo systemctl start elastic ElasticSearch
 
 Look at what is inside elasticsearch:
 .. code:: bash
 
    curl http://localhost:9200/_aliases?pretty=true
+
+Clear ElasticSearch:
+.. code:: bash
+
+   curl -X DELETE "localhost:9200/_all?pretty"
 
 If you ever see any problem with PSim first try this!!!!
 

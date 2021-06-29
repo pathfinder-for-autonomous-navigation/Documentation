@@ -1,8 +1,5 @@
-=============================
-Full Mission Simulation
-=============================
 
-This section of the documentation will guide you through the startup of PTest/GSW for Full Mission Simualtions
+.. _mission:
 
 =================================
 First Time Setup:
@@ -65,26 +62,7 @@ In a seperate terminal: Start TLM:
 .. code:: bash
 
    python -m tlm
-   
-In a seperate terminal: Start a Case that puts the satellite in the desired simulation level:
-Pick one of the following (AND CONFIGURE IMEI NUMBERS!!!):
 
-.. code:: bash
-
-   python -m ptest runsim -c ptest/configs/hootl_autotelem.json -t SingleSatStandbyCase
-   
-.. code:: bash
-
-   python -m ptest runsim -c ptest/configs/hootl_autotelem.json -t SingleSatStartupCase
- 
-.. code:: bash
-
-   python -m ptest runsim -c ptest/configs/hootl_hootl_autotelem.json -t DualSatStandbyCase
- 
-.. code:: bash
-
-   python -m ptest runsim -c ptest/configs/hootl_hootl_autotelem.json -t DualSatStartupCase
- 
 In a seperate terminal: Start an AutonomousMissionController with:
 
 .. code:: bash
@@ -103,4 +81,9 @@ Make sure to specify a ptest/config that uses a specific config:
    :maxdepth: 2
    :caption: Contents:
 
-   Debugging
+   installation_guide
+   running_a_hootl_hootl
+   running_a_hootl_hitl
+   common_problems
+   debugging
+   faq
